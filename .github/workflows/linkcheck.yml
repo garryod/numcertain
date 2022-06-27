@@ -11,6 +11,4 @@ jobs:
 
     steps:
       - name: Build docs
-        uses: dls-controls/pipenv-run-action@v1
-        with:
-          pipenv-run: docs -b linkcheck
+        run: sphinx-build -EWT --keep-going docs build/html -b linkcheck

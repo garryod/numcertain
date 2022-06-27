@@ -29,8 +29,7 @@ repos:
         entry: pydocstyle
         files: >
           (?x)^(
-            src\/|
-            tests\/
+            src\
           )
 
       - id: mypy

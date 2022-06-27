@@ -9,9 +9,9 @@ propagation of uncorrelated values.
 
 ============== ==============================================================
 PyPI           ``pip install numcertain``
-Source code    https://github.com/dls-controls/numcertain
-Documentation  https://dls-controls.github.io/numcertain
-Releases       https://github.com/dls-controls/numcertain/releases
+Source code    https://github.com/garryod/numcertain
+Documentation  https://garryod.github.io/numcertain
+Releases       https://github.com/garryod/numcertain/releases
 ============== ==============================================================
 
 A brief example of library usage is shown below:
@@ -44,16 +44,16 @@ A brief example of library usage is shown below:
     array_a * array_b: [uncertain(3.0, 0.30000000000000004) uncertain(8.0, 0.8)]
     array_a / array_b: [uncertain(3.0, 0.30000000000000004) uncertain(2.0, 0.2)]
 
-.. |code_ci| image:: https://github.com/dls-controls/numcertain/workflows/Code%20CI/badge.svg?branch=master
-    :target: https://github.com/dls-controls/numcertain/actions?query=workflow%3A%22Code+CI%22
+.. |code_ci| image:: https://github.com/garryod/numcertain/workflows/Code%20CI/badge.svg?branch=master
+    :target: https://github.com/garryod/numcertain/actions?query=workflow%3A%22Code+CI%22
     :alt: Code CI
 
-.. |docs_ci| image:: https://github.com/dls-controls/numcertain/workflows/Docs%20CI/badge.svg?branch=master
-    :target: https://github.com/dls-controls/numcertain/actions?query=workflow%3A%22Docs+CI%22
+.. |docs_ci| image:: https://github.com/garryod/numcertain/workflows/Docs%20CI/badge.svg?branch=master
+    :target: https://github.com/garryod/numcertain/actions?query=workflow%3A%22Docs+CI%22
     :alt: Docs CI
 
-.. |coverage| image:: https://codecov.io/gh/dls-controls/numcertain/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/dls-controls/numcertain
+.. |coverage| image:: https://codecov.io/gh/garryod/numcertain/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/garryod/numcertain
     :alt: Test Coverage
 
 .. |pypi_version| image:: https://img.shields.io/pypi/v/numcertain.svg
@@ -68,4 +68,4 @@ A brief example of library usage is shown below:
     Anything below this line is used when viewing README.rst and will be replaced
     when included in index.rst
 
-See https://dls-controls.github.io/numcertain for more detailed documentation.
+See https://garryod.github.io/numcertain for more detailed documentation.

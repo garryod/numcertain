@@ -1,6 +1,8 @@
 import glob
 import importlib.util
+from sysconfig import get_paths
 
+from numpy import get_include
 from numpy.distutils.core import Extension, setup
 
 # Import <package>._version_git.py without importing <package>
@@ -18,7 +20,7 @@ ext_modules = [
             "src/numcertain/uncertaindtype.c",
             "src/numcertain/npyuncertain.c",
         ],
-        include_dirs=["/usr/local/include"],
+        include_dirs=[get_paths()["include"], get_include()],
     ),
 ]
 
