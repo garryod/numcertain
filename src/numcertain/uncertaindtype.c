@@ -44,7 +44,7 @@ Uncertain_t uncertain_add(Uncertain_t a, Uncertain_t b)
 Uncertain_t uncertain_subtract(Uncertain_t a, Uncertain_t b)
 {
     Uncertain_t result = {
-        a.nominal - b.nominal, hypot(a.nominal, b.nominal)};
+        a.nominal - b.nominal, hypot(a.uncertainity, b.uncertainity)};
     return result;
 };
 
