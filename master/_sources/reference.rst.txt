@@ -10,7 +10,7 @@ Practical step-by-step guides for the more experienced user.
 
     reference/api
     reference/contributing
-    Releases <https://github.com/dls-controls/numcertain/releases>
+    Releases <https://github.com/garryod/numcertain/releases>
     Index <genindex.html#http://>
 
 ..
