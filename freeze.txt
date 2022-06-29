@@ -1,7 +1,7 @@
 alabaster==0.7.12
 attrs==21.4.0
 Babel==2.10.3
-black==22.3.0
+black==22.6.0
 certifi==2022.6.15
 cfgv==3.3.1
 charset-normalizer==2.0.12
@@ -10,7 +10,7 @@ coverage==6.4.1
 distlib==0.3.4
 docutils==0.17.1
 filelock==3.7.1
-flake8==3.9.2
+flake8==4.0.1
 flake8-isort==4.1.1
 flake8-pyi==22.5.1
 identify==2.5.1
@@ -31,9 +31,9 @@ platformdirs==2.5.2
 pluggy==1.0.0
 pre-commit==2.19.0
 py==1.11.0
-pycodestyle==2.7.0
+pycodestyle==2.8.0
 pydocstyle==6.1.1
-pyflakes==2.3.1
+pyflakes==2.4.0
 Pygments==2.12.0
 pyparsing==3.0.9
 pytest==7.1.2
@@ -57,4 +57,4 @@ toml==0.10.2
 tomli==2.0.1
 typing_extensions==4.2.0
 urllib3==1.26.9
-virtualenv==20.15.0
+virtualenv==20.15.1
