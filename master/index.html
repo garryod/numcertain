@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>numcertain &mdash; numcertain 0.0+untagged.g2bfd4a1 documentation</title>
+  <title>numcertain &mdash; numcertain 0.1.0+1.g509efc6 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -48,6 +48,15 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/installation.html">Installation</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how-to/use-uncertain-type.html">How to use the Uncertain type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/use-with-numpy.html">How to use the Uncertain dtype with numpy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Explanations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="explanations/uncertainty-propagation.html">Uncertainty Propagation Explained</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/api.html">API</a></li>
@@ -88,8 +97,8 @@ floating point value with quantified uncertainity, allowing for forward uncertai
 propagation of uncorrelated values.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 18%" />
-<col style="width: 82%" />
+<col style="width: 23%" />
+<col style="width: 77%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>PyPI</p></td>
@@ -106,33 +115,57 @@ propagation of uncorrelated values.</p>
 </tr>
 </tbody>
 </table>
-<p>A brief example of library usage is shown below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
-<span class="kn">from</span> <span class="nn">numcertain.uncertain</span> <span class="kn">import</span> <span class="n">uncertain</span>
+<section id="aritmatic-examples">
+<h2>Aritmatic Examples<a class="headerlink" href="#aritmatic-examples" title="Permalink to this heading"></a></h2>
+<p>A brief example of arithmatic with the provided uncertain data type is presented below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">42.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">uncertain</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 
-<span class="n">scalar</span> <span class="o">=</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">42.0</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">)</span>
-<span class="n">array_a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">uncertain</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)])</span>
-<span class="n">array_b</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">uncertain</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scalar: </span><span class="si">{</span><span class="n">scalar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array_a: </span><span class="si">{</span><span class="n">array_a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array_b: </span><span class="si">{</span><span class="n">array_b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array_a + array_b: </span><span class="si">{</span><span class="n">array_b</span> <span class="o">+</span> <span class="n">array_a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array_b - array_a: </span><span class="si">{</span><span class="n">array_a</span> <span class="o">-</span> <span class="n">array_b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array_a * array_b: </span><span class="si">{</span><span class="n">array_b</span> <span class="o">*</span> <span class="n">array_a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array_a / array_b: </span><span class="si">{</span><span class="n">array_b</span> <span class="o">/</span> <span class="n">array_a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scalar: <span class="m">42</span>.0±0.84
-array_a: <span class="o">[</span>uncertain<span class="o">(</span><span class="m">1</span>.0, <span class="m">0</span>.1<span class="o">)</span> uncertain<span class="o">(</span><span class="m">2</span>.0, <span class="m">0</span>.2<span class="o">)]</span>
-array_b: <span class="o">[</span>uncertain<span class="o">(</span><span class="m">3</span>.0, <span class="m">0</span>.0<span class="o">)</span> uncertain<span class="o">(</span><span class="m">4</span>.0, <span class="m">0</span>.0<span class="o">)]</span>
-array_a + array_b: <span class="o">[</span>uncertain<span class="o">(</span><span class="m">4</span>.0, <span class="m">0</span>.1<span class="o">)</span> uncertain<span class="o">(</span><span class="m">6</span>.0, <span class="m">0</span>.2<span class="o">)]</span>
-array_b - array_a: <span class="o">[</span>uncertain<span class="o">(</span>-2.0, <span class="m">3</span>.1622776601683795<span class="o">)</span> uncertain<span class="o">(</span>-2.0, <span class="m">4</span>.47213595499958<span class="o">)]</span>
-array_a * array_b: <span class="o">[</span>uncertain<span class="o">(</span><span class="m">3</span>.0, <span class="m">0</span>.30000000000000004<span class="o">)</span> uncertain<span class="o">(</span><span class="m">8</span>.0, <span class="m">0</span>.8<span class="o">)]</span>
-array_a / array_b: <span class="o">[</span>uncertain<span class="o">(</span><span class="m">3</span>.0, <span class="m">0</span>.30000000000000004<span class="o">)</span> uncertain<span class="o">(</span><span class="m">2</span>.0, <span class="m">0</span>.2<span class="o">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt; 78.0±13.0
+&gt;&gt; 6.0±13.0
+&gt;&gt; 1512.0±535.1784749034662
+&gt;&gt; 1.1666666666666667±0.41294635409218067
 </pre></div>
 </div>
+<p>A brief example of arithmatic with numpy arrays with the uncertain dtype is presented
+below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">uncertain</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">uncertain</span><span class="p">(</span><span class="mf">12.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">),</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">24.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">uncertain</span><span class="p">(</span><span class="mf">17.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">31.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)]</span>
+<span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">uncertain</span><span class="p">(</span><span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span> <span class="n">uncertain</span><span class="p">(</span><span class="o">-</span><span class="mf">17.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)]</span>
+<span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">uncertain</span><span class="p">(</span><span class="mf">60.0</span><span class="p">,</span> <span class="mf">41.182520563948</span><span class="p">)</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">168.0</span><span class="p">,</span> <span class="mf">154.50566332662373</span><span class="p">)]</span>
+<span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">uncertain</span><span class="p">(</span><span class="mf">0.4166666666666667</span><span class="p">,</span> <span class="mf">0.2859897261385278</span><span class="p">)</span> <span class="n">uncertain</span><span class="p">(</span><span class="mf">0.2916666666666667</span><span class="p">,</span> <span class="mf">0.268238998830944</span><span class="p">)]</span>
+</pre></div>
+</div>
+</section>
+<section id="alternative-methods">
+<h2>Alternative Methods<a class="headerlink" href="#alternative-methods" title="Permalink to this heading"></a></h2>
+<p>In order to accurately propagate uncertainties of related values the derivative of the
+computed expectation must be known with respect to expectations it is comprised of.
+Automatic differentiation (autodiff) provides a mechanism for computing the derivative
+of arbitrary functions with respect to their components by exploiting the fact that all
+codes, regardless of complexity, are reduced to a sequence of primative arithmetic
+operations during execution for which the derivatives are known, by applying the chain
+rule the overall derivative can be determined automatically.</p>
+<p>The python package <a class="reference external" href="https://uncertainties-python-package.readthedocs.io/en/latest/">Uncertainties</a> provides a python data type which performs autodiff
+to propagate the corresponding uncertainity, unforunately due to Implementation as a
+python object the library is non-performant when used for array math.</p>
+<p>Whilst <a class="reference external" href="http://theoryandpractice.org/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html">Propagation of Uncertainty with autodiff</a>, describes the use of autodiff
+provided by the python package <a class="reference external" href="https://jax.readthedocs.io/en/latest/">JAX</a> in propagating uncertainities for array math.</p>
+</section>
 <section id="how-the-documentation-is-structured">
 <h2>How the documentation is structured<a class="headerlink" href="#how-the-documentation-is-structured" title="Permalink to this heading"></a></h2>
 <p>Documentation is split into four categories, also accessible from links in the
@@ -156,12 +189,37 @@ side-bar.</p>
 <h3><a class="reference internal" href="how-to.html"><span class="doc">How-to Guides</span></a><a class="headerlink" href="#how-to" title="Permalink to this heading"></a></h3>
 <p>Practical step-by-step guides for the more experienced user.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how-to/use-uncertain-type.html">How to use the Uncertain type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-uncertain-type.html#creating-an-uncertain-value">Creating an uncertain value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-uncertain-type.html#converting-to-an-uncertain-value">Converting to an uncertain value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-uncertain-type.html#displaying-an-uncertain-value">Displaying an uncertain value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-uncertain-type.html#retrieving-expectance-or-standard-deviation">Retrieving expectance or standard deviation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-uncertain-type.html#arithmetic-with-uncertain-values">Arithmetic with uncertain values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/use-with-numpy.html">How to use the Uncertain dtype with numpy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-with-numpy.html#creating-an-array-of-uncertain-values">Creating an array of uncertain values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-with-numpy.html#converting-an-array-to-the-uncertain-dtype">Converting an array to the uncertain dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/use-with-numpy.html#arithmetic-with-uncertain-values">Arithmetic with uncertain values</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
 <section class="columns" id="explanations">
 <h3><a class="reference internal" href="explanations.html"><span class="doc">Explanations</span></a><a class="headerlink" href="#explanations" title="Permalink to this heading"></a></h3>
 <p>Explanation of how the library works and why it works that way.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Explanations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="explanations/uncertainty-propagation.html">Uncertainty Propagation Explained</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="explanations/uncertainty-propagation.html#in-numcertain">In Numcertain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/uncertainty-propagation.html#alternative-methods">Alternative Methods</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
 <section class="columns" id="reference">
