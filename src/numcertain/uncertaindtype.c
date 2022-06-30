@@ -74,6 +74,16 @@ long uncertain_long(Uncertain_t u)
     return (long)u.nominal;
 };
 
+bool uncertain_eq(Uncertain_t a, Uncertain_t b)
+{
+    return a.nominal == b.nominal && a.uncertainity == b.uncertainity;
+};
+
+bool uncertain_ne(Uncertain_t a, Uncertain_t b)
+{
+    return a.nominal != b.nominal || a.uncertainity != b.uncertainity;
+};
+
 int uncertain_nonzero(Uncertain_t u)
 {
     return u.nominal != 0 || u.uncertainity != 0;
@@ -233,6 +243,27 @@ PyObject *PyUncertain_str(PyObject *self)
     return PyUnicode_FromFormat("%s%U%s", nominal_str, plus_minus, uncertainty_str);
 };
 
+PyTypeObject *PyUncertain_richcompare(PyObject *self, PyObject *other, int op)
+{
+    Uncertain_t uncertain_self = ((PyUncertain_t *)self)->u;
+    Uncertain_t uncertain_other = ((PyUncertain_t *)other)->u;
+    switch (op)
+    {
+    case Py_EQ:
+        if (uncertain_eq(uncertain_self, uncertain_other))
+            Py_RETURN_TRUE;
+        else
+            Py_RETURN_FALSE;
+    case Py_NE:
+        if (uncertain_ne(uncertain_self, uncertain_other))
+            Py_RETURN_TRUE;
+        else
+            Py_RETURN_FALSE;
+    default:
+        Py_RETURN_FALSE;
+    }
+};
+
 PyObject *PyUncertain_nominal(PyObject *self, void *closure)
 {
     return PyFloat_FromDouble(((PyUncertain_t *)self)->u.nominal);
@@ -240,7 +271,8 @@ PyObject *PyUncertain_nominal(PyObject *self, void *closure)
 
 PyObject *PyUncertain_uncertainty(PyObject *self, void *closure)
 {
-    return PyFloat_FromDouble(((PyUncertain_t *)self)->u.uncertainity);
+    Uncertain_t u = ((PyUncertain_t *)self)->u;
+    return PyFloat_FromDouble(u.uncertainity);
 };
 
 PyGetSetDef PyUncertain_getset[] = {
@@ -271,7 +303,7 @@ PyTypeObject PyUncertain_Type = {
     "Fixed precision number with quantified uncertainty",  // tp_doc
     0,                                                     // tp_traverse
     0,                                                     // tp_clear
-    0,                                                     // tp_richcompare
+    PyUncertain_richcompare,                               // tp_richcompare
     0,                                                     // tp_weaklistoffset
     0,                                                     // tp_iter
     0,                                                     // tp_iternext

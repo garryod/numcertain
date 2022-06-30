@@ -105,23 +105,44 @@ PyMODINIT_FUNC PyInit_uncertain(void)
     REGISTER_CAST(npy_bool, Uncertain_t, PyArray_DescrFromType(NPY_BOOL), npy_uncertain, 1)
     REGISTER_CAST(Uncertain_t, npy_bool, &npyuncertain_descr, NPY_BOOL, 0)
 
-#define REGISTER_UFUNC_BINOP(name)                                                    \
+#define REGISTER_UFUNC(name, ...)                                                     \
     {                                                                                 \
         PyUFuncObject *ufunc = (PyUFuncObject *)PyObject_GetAttrString(numpy, #name); \
-        int arg_types[] = {npy_uncertain, npy_uncertain, npy_uncertain};              \
+        if (!ufunc)                                                                   \
+        {                                                                             \
+            return NULL;                                                              \
+        }                                                                             \
+        int arg_types[] = __VA_ARGS__;                                                \
+        if (sizeof(arg_types) / sizeof(int) != ufunc->nargs)                          \
+        {                                                                             \
+            Py_DECREF(ufunc);                                                         \
+            return NULL;                                                              \
+        }                                                                             \
         if (PyUFunc_RegisterLoopForType(                                              \
                 (PyUFuncObject *)ufunc,                                               \
                 npy_uncertain,                                                        \
                 uncertain_ufunc_##name,                                               \
                 arg_types,                                                            \
                 0) < 0)                                                               \
+        {                                                                             \
+            Py_DECREF(ufunc);                                                         \
             return NULL;                                                              \
+        }                                                                             \
+        Py_DECREF(ufunc);                                                             \
     }
 
-    REGISTER_UFUNC_BINOP(add)
-    REGISTER_UFUNC_BINOP(subtract)
-    REGISTER_UFUNC_BINOP(multiply)
-    REGISTER_UFUNC_BINOP(divide)
+#define REGISTER_UFUNC_BINOP_UNCERTAIN(name) \
+    REGISTER_UFUNC(name, {npy_uncertain, npy_uncertain, npy_uncertain})
+#define REGISTER_UFUNC_BINOP_BOOL(name) \
+    REGISTER_UFUNC(name, {npy_uncertain, npy_uncertain, NPY_BOOL})
+
+    REGISTER_UFUNC_BINOP_UNCERTAIN(add)
+    REGISTER_UFUNC_BINOP_UNCERTAIN(subtract)
+    REGISTER_UFUNC_BINOP_UNCERTAIN(multiply)
+    REGISTER_UFUNC_BINOP_UNCERTAIN(divide)
+
+    REGISTER_UFUNC_BINOP_BOOL(equal)
+    REGISTER_UFUNC_BINOP_BOOL(not_equal)
 
     PyObject *module = PyModule_Create(&moduledef);
     if (!module)

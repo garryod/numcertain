@@ -96,6 +96,9 @@ BINOP_UFUNC(subtract)
 BINOP_UFUNC(multiply)
 BINOP_UFUNC(divide)
 
+BINOP_UFUNC(equal)
+BINOP_UFUNC(not_equal)
+
 #undef BINOP_UFUNC
 
 #endif

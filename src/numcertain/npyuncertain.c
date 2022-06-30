@@ -178,7 +178,7 @@ DEFINE_INT_CAST(64)
 DEFINE_CAST(npy_bool, Uncertain_t, Uncertain_t y = make_uncertain_long(x);)
 DEFINE_CAST(Uncertain_t, npy_bool, npy_bool y = uncertain_nonzero(x);)
 
-#define BINOP_UFUNC(name)                                   \
+#define UNCERTAIN_BINOP_UFUNC(name, outtype, exp)           \
     void uncertain_ufunc_##name(char **args,                \
                                 npy_intp const *dimensions, \
                                 npy_intp const *steps,      \
@@ -196,14 +196,17 @@ DEFINE_CAST(Uncertain_t, npy_bool, npy_bool y = uncertain_nonzero(x);)
         {                                                   \
             Uncertain_t a = *(Uncertain_t *)in_a;           \
             Uncertain_t b = *(Uncertain_t *)in_b;           \
-            *(Uncertain_t *)out = uncertain_##name(a, b);   \
+            *(outtype *)out = exp(a, b);                    \
             in_a += in_a_step;                              \
             in_b += in_b_step;                              \
             out += out_step;                                \
         }                                                   \
     }
 
-BINOP_UFUNC(add)
-BINOP_UFUNC(subtract)
-BINOP_UFUNC(multiply)
-BINOP_UFUNC(divide)
+UNCERTAIN_BINOP_UFUNC(add, Uncertain_t, uncertain_add)
+UNCERTAIN_BINOP_UFUNC(subtract, Uncertain_t, uncertain_subtract)
+UNCERTAIN_BINOP_UFUNC(multiply, Uncertain_t, uncertain_multiply)
+UNCERTAIN_BINOP_UFUNC(divide, Uncertain_t, uncertain_divide)
+
+UNCERTAIN_BINOP_UFUNC(equal, bool, uncertain_eq)
+UNCERTAIN_BINOP_UFUNC(not_equal, bool, uncertain_ne)
