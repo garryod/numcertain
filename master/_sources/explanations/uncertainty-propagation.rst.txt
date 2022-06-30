@@ -44,7 +44,7 @@ table below:
 
       - .. math::
 
-            \sigma_z=\sigma_a\sigma_b\sqrt{\frac{\sigma_a}{a}^2+\frac{\sigma_b}{b}^2}
+            \sigma_z=ab\sqrt{\frac{\sigma_a}{a}^2+\frac{\sigma_b}{b}^2}
 
     * - .. math::
 
@@ -52,7 +52,7 @@ table below:
 
       - .. math::
 
-            \sigma_z=\frac{\sigma_a}{\sigma_b}\sqrt{\frac{\sigma_a}{a}^2+\frac{\sigma_b}{b}^2}
+            \sigma_z=\frac{a}{b}\sqrt{\frac{\sigma_a}{a}^2+\frac{\sigma_b}{b}^2}
 
 
 Alternative Methods
