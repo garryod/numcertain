@@ -20,3 +20,5 @@ class uncertain:
     __rmul__: _UncertainOp
     __truediv__: _UncertainOp
     __rtruediv__: _UncertainOp
+    nominal: float
+    uncertainty: float
