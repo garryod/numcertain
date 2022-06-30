@@ -93,7 +93,6 @@ PyMODINIT_FUNC PyInit_uncertain(void)
         NPY_INT##bits,                        \
         0)
 
-    REGISTER_FLOAT_CAST(16)
     REGISTER_FLOAT_CAST(32)
     REGISTER_FLOAT_CAST(64)
 

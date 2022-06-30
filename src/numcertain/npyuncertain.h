@@ -69,7 +69,6 @@ extern PyArray_ArrFuncs npyuncertain_arrfuncs;
                 npy_int##bits y = z;                 \
                 if (y != z) set_overflow();)
 
-DEFINE_FLOAT_CAST(16)
 DEFINE_FLOAT_CAST(32)
 DEFINE_FLOAT_CAST(64)
 
