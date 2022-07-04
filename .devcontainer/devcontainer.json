@@ -36,8 +36,5 @@
 	},
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
 	"workspaceFolder": "/workspace",
-	"runArgs": [
-		"--userns=keep-id",
-	],
 	"postCreateCommand": "pip install -e .[dev]"
 }
