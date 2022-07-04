@@ -121,13 +121,13 @@ jobs:
       matrix:
         os: ["ubuntu-latest"] # can add windows-latest, macos-latest
         python: ["3.9", "3.10"]
-        deploy: [{tag: "FROZEN", arg: "-r requirements.txt"}]
+        deploy: [{tag: "CURRENT", arg: ""}]
 
         include:
           # Add an extra Python3.9 runner to use the lockfile
           - os: "ubuntu-latest"
             python: "3.9"
-            deploy: [{tag: "CURRENT", arg: ""}]
+            deploy: [{tag: "FROZEN", arg: "-r requirements.txt"}]
 
     runs-on: ${{ matrix.os }}
     env:
