@@ -70,9 +70,7 @@ jobs:
         run: |
           chmod -R g+w .
           umask 0002
-          pipx run --python $(which python${{ matrix.python }}) build --sdist
-        env:
-          SOURCE_DATE_EPOCH: $(git log -1 --pretty=%ct)
+          pipx run --python $(which python${{ matrix.python }}) build --sdist         
 
       - name: Upload Sdist as artifact
         uses: actions/upload-artifact@v3
